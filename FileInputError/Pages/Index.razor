@@ -1,0 +1,39 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Input File Error Sample</h1>
+<RadzenTemplateForm TItem="long" Submit="@OnSubmit">
+    <RadzenFieldset Text="With Radzen Form">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <RadzenLabel Text="File Input without OnChangeEvent" />
+                    <InputFile class="form-control" accept=".xlsx" required />
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="form-group">
+                    <RadzenLabel Text="File Input with OnChangeEvent" />
+                    <InputFile class="form-control" OnChange="OnInputFileChange" accept=".xlsx" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <RadzenButton ButtonType="ButtonType.Submit" Text="Submit" />
+        </div>
+    </RadzenFieldset>
+</RadzenTemplateForm>
+
+@code {
+    private void OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        Console.WriteLine($"Input file selected.[FileName= {e.File?.Name}]");
+    }
+
+    private void OnSubmit()
+    {
+        Console.WriteLine($"Form submitted");
+    }
+}
